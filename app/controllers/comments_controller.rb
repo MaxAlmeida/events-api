@@ -7,6 +7,12 @@ class CommentsController < ApplicationController
         json_response(@event.comments)
     end
 
+    #GET /events/:event_id/comments/reports
+    def reports
+        comments_reported = @event.comments.select{|comment| comment.reported?}
+        json_response(comments_reported)
+    end
+
     #GET /events/:event_id/comments/:id
     def show
         json_response(@comment)
