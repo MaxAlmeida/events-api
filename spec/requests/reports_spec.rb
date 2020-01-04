@@ -46,5 +46,21 @@ RSpec.describe 'Comments API' do
                     .to match(/Validation failed: User must exist/)
             end
         end
+
+        context 'when request more than once report to same comment' do
+            before do 
+                post '/reports', params: {user_id: user_id, comment_id: comment_id}
+                post '/reports', params: {user_id: user_id, comment_id: comment_id}
+            end
+
+            it 'returns status code 422' do
+                expect(response).to have_http_status(422)
+            end
+
+            it 'returns a validation failure message' do
+                expect(response.body)
+                    .to match(/Validation failed: User has already been taken/)
+            end
+        end
     end
 end
