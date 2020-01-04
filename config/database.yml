@@ -6,15 +6,16 @@
 #
 default: &default
   adapter: mysql2
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  encoding: utf8
+  username: user_your_database
+  password: root_your_database
 
 development:
   <<: *default
   database: event_api
-  username: root
-  password: root
+  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,25 +23,9 @@ development:
 test:
   <<: *default
   database: event_api_test
-  username: root
-  password: root
+  
 
 production:
   <<: *default
   database: event_api_prod
 
-#   development:
-#   adapter: mysql2
-#   database: monsterhunt
-#   host: localhost
-#   username: root
-#   password: root
-  
-
-# test:
-#   adapter: mysql2
-#   database: monsterhunttest
-#   host: localhost
-#   username: root
-#   password: root
-#   encoding: utf8
