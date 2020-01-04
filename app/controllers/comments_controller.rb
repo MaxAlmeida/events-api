@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     #POST /events/:event_id/comments
     def create
         @event.comments.create!(comment_params)
-        json_response(@event, :created)
+        json_response(@event.comments.last, :created)
     end
 
     #PUT /events/:event_id/comments/:id

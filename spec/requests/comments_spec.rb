@@ -65,7 +65,10 @@ RSpec.describe 'Comments API' do
     
         context 'when request attributes are valid' do
           before { post "/events/#{event_id}/comments", params: valid_attributes }
-    
+
+          it 'returns comment' do
+            expect(json['text']).to eq('Nice event, i loved it')
+          end
           it 'returns status code 201' do
             expect(response).to have_http_status(201)
           end
