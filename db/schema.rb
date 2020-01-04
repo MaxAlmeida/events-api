@@ -12,28 +12,28 @@
 
 ActiveRecord::Schema.define(version: 2020_01_04_152743) do
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text"
-    t.integer "user_id"
-    t.integer "event_id"
+    t.bigint "user_id"
+    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_comments_on_event_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.decimal "latitude"
-    t.decimal "longitude"
+    t.decimal "latitude", precision: 10
+    t.decimal "longitude", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "reports", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "comment_id"
+  create_table "reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_reports_on_comment_id"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2020_01_04_152743) do
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
@@ -49,4 +49,8 @@ ActiveRecord::Schema.define(version: 2020_01_04_152743) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "events"
+  add_foreign_key "comments", "users"
+  add_foreign_key "reports", "comments"
+  add_foreign_key "reports", "users"
 end
