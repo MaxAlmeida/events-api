@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  post 'reports', to: 'reports#create'
   post 'signup', to: 'users#create'
 end
