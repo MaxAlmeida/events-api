@@ -1,10 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it { should have_many(:comments)}
-  it { should have_many(:reports)}
-
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:password_digest) }
+  describe 'associations' do
+    it { should have_many(:comments)}
+    it { should have_many(:reports)}
+  end
+  
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:password_digest) }
+  end
 end
