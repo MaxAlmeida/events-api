@@ -34,6 +34,34 @@ RSpec.describe 'Comments API' do
         end
     end
 
+    describe 'GET /events/:event_id/reports' do
+
+      context 'when event has comments reported' do
+        let!(:report) {create(:report, user_id: user_id, comment_id: id)}
+        before { get "/events/#{event_id}/reports"}
+
+        it 'returns status code 200' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'return event reported comments' do
+          expect(json.size).to eq(1)
+        end
+      end
+
+      context 'when event has not comments reported' do
+        before { get "/events/#{event_id}/reports"}
+
+        it 'returns status code 200' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'return event reported comments' do
+          expect(json.size).to eq(0)
+        end
+      end
+    end
+
     describe "GET /events/:event_id/comments/:id" do
         before { get "/events/#{event_id}/comments/#{id}" }
 
