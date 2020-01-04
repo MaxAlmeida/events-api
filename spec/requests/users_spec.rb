@@ -14,7 +14,7 @@ RSpec.describe 'Users API' do
                 }
             end
 
-            before { post '/signup', params: valid_attributes }
+            before { post '/api/v1/signup', params: valid_attributes }
             
             it "create a user" do
                 expect(json['user']['name']).to eq(user.name)
@@ -34,7 +34,7 @@ RSpec.describe 'Users API' do
                 }
             end
 
-            before { post '/signup', params: invalid_attributes }
+            before { post '/api/v1/signup', params: invalid_attributes }
 
             it 'returns status code 422' do
                 expect(response).to have_http_status(422)
@@ -57,7 +57,7 @@ RSpec.describe 'Users API' do
                 }
             end
 
-            before { post '/signup', params: invalid_attributes }
+            before { post '/api/v1/signup', params: invalid_attributes }
 
             it 'returns status code 422' do
                 expect(response).to have_http_status(422)

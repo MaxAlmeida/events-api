@@ -9,7 +9,7 @@ RSpec.describe 'Comments API' do
     let(:id) { comments.first.id}
 
     describe 'GET /events/:event_id/comments' do
-        before { get "/events/#{event_id}/comments"}
+        before { get "/api/v1/events/#{event_id}/comments"}
 
         context 'when event exist' do
             it 'returns status code 200' do
@@ -38,7 +38,7 @@ RSpec.describe 'Comments API' do
 
       context 'when event has comments reported' do
         let!(:report) {create(:report, user_id: user_id, comment_id: id)}
-        before { get "/events/#{event_id}/reports"}
+        before { get "/api/v1/events/#{event_id}/reports"}
 
         it 'returns status code 200' do
           expect(response).to have_http_status(200)
@@ -50,7 +50,7 @@ RSpec.describe 'Comments API' do
       end
 
       context 'when event has not comments reported' do
-        before { get "/events/#{event_id}/reports"}
+        before { get "/api/v1/events/#{event_id}/reports"}
 
         it 'returns status code 200' do
           expect(response).to have_http_status(200)
@@ -63,7 +63,7 @@ RSpec.describe 'Comments API' do
     end
 
     describe "GET /events/:event_id/comments/:id" do
-        before { get "/events/#{event_id}/comments/#{id}" }
+        before { get "/api/v1/events/#{event_id}/comments/#{id}" }
 
         context 'when event comment exists' do
             it 'returns status code 200' do
@@ -92,7 +92,7 @@ RSpec.describe 'Comments API' do
         let(:valid_attributes) { { text: "Nice event, i loved it", user_id: user_id } }
     
         context 'when request attributes are valid' do
-          before { post "/events/#{event_id}/comments", params: valid_attributes }
+          before { post "/api/v1/events/#{event_id}/comments", params: valid_attributes }
 
           it 'returns comment' do
             expect(json['text']).to eq('Nice event, i loved it')
@@ -103,7 +103,7 @@ RSpec.describe 'Comments API' do
         end
     
         context 'when an invalid request' do
-          before { post "/events/#{event_id}/comments", params: {} }
+          before { post "/api/v1/events/#{event_id}/comments", params: {} }
     
           it 'returns status code 422' do
             expect(response).to have_http_status(422)
@@ -118,7 +118,7 @@ RSpec.describe 'Comments API' do
     describe 'PUT /events/:event_id/comments/:id' do
         let(:valid_attributes) { { text: 'Beutiful event, i loved it!' } }
     
-        before { put "/events/#{event_id}/comments/#{id}", params: valid_attributes }
+        before { put "/api/v1/events/#{event_id}/comments/#{id}", params: valid_attributes }
     
         context 'when comment exists' do
           it 'returns status code 204' do
@@ -146,7 +146,7 @@ RSpec.describe 'Comments API' do
 
     describe 'DELETE /event/:id/comments/:id' do
       
-        before { delete "/events/#{event_id}/comments/#{id}" }
+        before { delete "/api/v1/events/#{event_id}/comments/#{id}" }
     
         it 'returns status code 204' do
           expect(response).to have_http_status(204)

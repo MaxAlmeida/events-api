@@ -10,7 +10,7 @@ RSpec.describe 'Comments API' do
     describe 'POST reports' do
     
         context 'when the request is valid' do
-            before { post '/reports', params: {user_id: user_id, comment_id: comment_id} }
+            before { post '/api/v1/reports', params: {user_id: user_id, comment_id: comment_id} }
 
             it 'create reports' do
                 expect(json['comment_id']).to eq(comment_id)
@@ -22,7 +22,7 @@ RSpec.describe 'Comments API' do
         end
 
         context 'when the request without params' do
-            before { post '/reports', params: {}}
+            before { post '/api/v1/reports', params: {}}
 
             it 'returns status code 404' do
                 expect(response).to have_http_status(404)
@@ -35,7 +35,7 @@ RSpec.describe 'Comments API' do
         end
 
         context 'when the request without user_id' do
-            before { post '/reports', params: {comment_id: comment_id}}
+            before { post '/api/v1/reports', params: {comment_id: comment_id}}
 
             it 'returns status code 422' do
                 expect(response).to have_http_status(422)
@@ -49,8 +49,8 @@ RSpec.describe 'Comments API' do
 
         context 'when request more than once report to same comment' do
             before do 
-                post '/reports', params: {user_id: user_id, comment_id: comment_id}
-                post '/reports', params: {user_id: user_id, comment_id: comment_id}
+                post '/api/v1/reports', params: {user_id: user_id, comment_id: comment_id}
+                post '/api/v1/reports', params: {user_id: user_id, comment_id: comment_id}
             end
 
             it 'returns status code 422' do

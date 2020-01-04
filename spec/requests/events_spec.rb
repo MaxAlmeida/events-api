@@ -6,7 +6,7 @@ RSpec.describe 'Events API', type: :request do
 
     #Test suite for GET /events
     describe 'GET /events' do
-        before { get '/events' }
+        before { get '/api/v1/events' }
 
         it 'return events' do
             expect(json).not_to be_empty
@@ -19,7 +19,7 @@ RSpec.describe 'Events API', type: :request do
     end
 
     describe 'GET /events/:id' do
-        before{ get "/events/#{event_id}" }
+        before{ get "/api/v1/events/#{event_id}" }
 
         context 'when the record exists' do
             it 'returns the event' do
@@ -56,7 +56,7 @@ RSpec.describe 'Events API', type: :request do
         end
 
         context "when the request is valid" do
-            before {post '/events', params: valid_attributes}
+            before {post '/api/v1/events', params: valid_attributes}
 
             it 'creates a event' do
                 expect(json['name']).to eq('Show')
@@ -68,7 +68,7 @@ RSpec.describe 'Events API', type: :request do
         end
 
         context 'when the request is invalid' do
-            before {post '/events', params: { description: "Beautiful show in Las vegas",
+            before {post '/api/v1/events', params: { description: "Beautiful show in Las vegas",
                  longitude: 22.22, latitude: 33.10}}
 
             it 'returns status code 422' do
@@ -86,7 +86,7 @@ RSpec.describe 'Events API', type: :request do
         let(:valid_attributes) {{ name: "The sunset show in dubai"}}
 
         context 'when the record exists' do
-            before { put "/events/#{event_id}", params: valid_attributes}
+            before { put "/api/v1/events/#{event_id}", params: valid_attributes}
 
             it 'updates the record' do
                 expect(response.body).to be_empty
@@ -99,7 +99,7 @@ RSpec.describe 'Events API', type: :request do
     end
 
     describe 'DELETE /events/:id' do
-        before { delete "/events/#{event_id}"}
+        before { delete "/api/v1/events/#{event_id}"}
 
         it "returns status code 204" do
             expect(response).to have_http_status(204)
