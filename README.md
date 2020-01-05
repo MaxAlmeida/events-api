@@ -3,12 +3,12 @@
 Event-api is a system that provides an API for recording various events such as concerts, charity games, pallets, sporting events.The following describes data modeling and instructions for use.
 
 ## Data model
-<img src="https://raw.githubusercontent.com/MaxAlmeida/events-api/master/event-api-diagram.jpg">
+<img src="https://raw.githubusercontent.com/MaxAlmeida/events-api/master/event-api-diagram.png">
 Event-api data modeling is based on the following context:
 
  * A user can comment on an event.
  
- * you can report a message only once.
+ * A user can report a message only once.
  
  * An event can receive multiple comments.
  
