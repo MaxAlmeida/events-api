@@ -84,5 +84,38 @@ DELETE | /api/v1/events/:id | api/v1/events#destroy | destroy a specific event
 POST  | /api/v1/reports | api/v1/reports#create | create a new report
 POST | /api/v1/signup | api/v1/users#create | create a new user
 
+Following are examples of request using [httpie](https://httpie.org/).
 
+### Request comments
 
+Show all comments for event with id = 1 :
+ ```
+ http :3000/api/v1/events/1/comments
+ 
+ ```
+create a new comment for event with id = 1 and user id = 1 :
+ ```
+ http POST :3000/api/v1/events/1/comments text="Nice event" user_id=1
+ 
+ ```
+show a comment with id = 1 for event with id = 1
+ ```
+ http :3000/api/v1/events/1/comments/1
+ 
+ ```
+update a comment with id = 1 for event with id = 1
+ ```
+ http PUT :3000/api/v1/events/1/comments/1 text="Bad event"
+ 
+ ```
+delete a comment with id = 1 for event with id = 1
+ ```
+ http DELETE :3000/api/v1/events/1/comments/1
+ 
+ ```
+show comments reported for event with id = 1
+ ```
+ http :3000/api/v1/events/1/reports
+ 
+ ```
+ 
