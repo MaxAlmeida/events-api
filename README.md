@@ -1,24 +1,66 @@
-# README
+# Event-api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Event-api is a system that provides an API for recording various events such as concerts, charity games, pallets, sporting events.The following describes data modeling and instructions for use.
 
-Things you may want to cover:
+## Data model
+<img src="https://raw.githubusercontent.com/MaxAlmeida/events-api/master/event-api-diagram.jpg">
+Event-api data modeling is based on the following context:
 
-* Ruby version
+ * A user can comment on an event.
+ 
+ * you can report a message only once.
+ 
+ * An event can receive multiple comments.
+ 
+ * A comment may receive multiple reports
+ 
+ * An instance of a report is associated with a single user and a single message.
+ 
+ * A message instance is associated with a single user and a single event.
+ 
+ 
+## Enviroment
+ Configure your system with the following versions:
+ 
+ * Ruby version: 2.3.3
+  
+ * Rails version: 5.2
+  
+ * Database configuration and gems installation:
+    * Install gems
+      ```
+        $ bundle install
+      ```
+      
+    * Modify username and password in config/database.yml according to your database settings:
+    
+      ```
+        default: &default
+        adapter: mysql2
+        encoding: utf8
+        pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+        timeout: 5000
+        username: user_your_database
+        password: root_your_database
+      ```
+    * Create database:
+      ```
+       $ rake db:create
+      ```
+      ```
+       $ rake db:migrate
+      ```
+    * Initialize database:
+      ```
+       $ rake db:seed
+      ```
+    * Finally, run the following in order start server:
+    
+       ```
+       $ rails s
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+       ```    
+  * Running tests:
+    ```
+      $ rspec
+    ```
