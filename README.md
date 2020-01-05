@@ -64,3 +64,25 @@ Event-api data modeling is based on the following context:
     ```
       $ rspec
     ```
+    
+## API Usage
+The following table show routes provided by this api:
+
+HTTP Verb | Path | Controller#Action | Used for
+--------- | ---- | ----------------- | -------
+GET | /api/v1/events/:event_id/comments |  api/v1/comments#index | show all comments for a specific event
+POST |  /api/v1/events/:event_id/comments | api/v1/comments#create | create a new comment in specific event
+GET | /api/v1/events/:event_id/comments/:id | api/v1/comments#show | display a specific comment in specific event
+PATCH/PUT | /api/v1/events/:event_id/comments/:id | api/v1/comments#update | update a specific comment in specific event
+DELETE | /api/v1/events/:event_id/comments/:id | api/v1/comments#destroy | delete a specific comment in specific event
+GET | /api/v1/events/:event_id/reports | api/v1/comments#reports | show all comments reported for a specific event (**Bonus!!**)
+GET | /api/v1/events | api/v1/events#index | show all events
+POST | /api/v1/events | api/v1/events#create | create a new event
+GET | /api/v1/events/:id | api/v1/events#show | show a specific event
+PATCH/PUT | /api/v1/events/:id | api/v1/events#update | update a specific comment
+DELETE | /api/v1/events/:id | api/v1/events#destroy | destroy a specific event
+POST  | /api/v1/reports | api/v1/reports#create | create a new report
+POST | /api/v1/signup | api/v1/users#create | create a new user
+
+
+
